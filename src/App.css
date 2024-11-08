@@ -1,38 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #4CAF50;
+  --primary-hover: #45a049;
+  --secondary-color: #2c3e50;
+  --background-light: #f8f9fa;
+  --background-dark: #e9ecef;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --border-color: #ddd;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --white: #ffffff;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  --border-radius: 8px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--background-light);
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Общие стили для кнопок */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: var(--background-dark);
+  color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border-color);
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .form-wrapper,
+  .metrics-wrapper {
+    margin: 20px auto;
+  }
+
+  .form-container,
+  .metrics-container {
+    padding: 20px;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .date-inputs {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-bar {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .progress-bar::before {
+    height: 100%;
+    width: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Дополнительные стили для мобильной версии */
+  .btn {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .form-navigation {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .info-container {
+    padding: 20px 15px;
+  }
+
+  .info-header h1 {
+    font-size: 1.5em;
+  }
+
+  section {
+    padding: 20px 15px;
+  }
+
+  .grant-types {
+    grid-template-columns: 1fr;
+  }
+
+  .training-info {
+    padding: 15px;
+  }
+
+  .note-box,
+  .contact-info {
+    margin: 15px 0;
+    padding: 15px;
+  }
+}
+
+/* Медиа-запросы для очень маленьких экранов */
+@media (max-width: 480px) {
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .step-label {
+    font-size: 0.8rem;
+  }
+
+  .info-header h1 {
+    font-size: 1.3em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  h3 {
+    font-size: 1.1em;
+  }
+}
+
+/* Медиа-запросы для планшетов */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 0 30px;
+  }
+
+  .form-wrapper,
+  .metrics-wrapper {
+    max-width: 90%;
+  }
+
+  .options-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .info-container {
+    max-width: 90%;
   }
 }

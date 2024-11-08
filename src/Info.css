@@ -1,0 +1,266 @@
+.info-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  .info-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  
+  .info-header h1 {
+    font-size: 2.2em;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.3;
+  }
+  
+  .info-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+  
+  section {
+    padding: 30px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  section:last-child {
+    border-bottom: none;
+  }
+  
+  h2 {
+    color: #1a1a1a;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  h3 {
+    color: #2c3e50;
+    font-size: 1.4em;
+    margin: 20px 0 15px;
+  }
+  
+  .intro-section p {
+    font-size: 1.1em;
+    color: #2c3e50;
+    line-height: 1.7;
+  }
+  
+  .support-note {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-style: italic;
+  }
+  
+  .grant-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .grant-type {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #4CAF50;
+  }
+  
+  .grant-type h3 {
+    color: #2c3e50;
+    margin-top: 0;
+  }
+  
+  .grant-type .note {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 10px;
+  }
+  
+  .support-list, .criteria-list, .deadlines-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .support-list li, .criteria-list li, .deadlines-list li {
+    padding: 10px 0 10px 25px;
+    position: relative;
+  }
+  
+  .support-list li:before, .criteria-list li:before, .deadlines-list li:before {
+    content: "•";
+    color: #4CAF50;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+  }
+  
+  .training-section {
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  
+  .training-info ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .training-info li {
+    padding: 8px 0 8px 25px;
+    position: relative;
+  }
+  
+  .training-info li:before {
+    content: "✓";
+    color: #4CAF50;
+    position: absolute;
+    left: 0;
+  }
+  
+  .training-dates {
+    margin-top: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .register-link {
+    color: #4CAF50;
+    text-decoration: none;
+    margin-left: 10px;
+    font-weight: 600;
+  }
+  
+  .register-link:hover {
+    text-decoration: underline;
+  }
+  
+  .deadlines-section {
+    background: #fff3cd;
+    border-radius: 8px;
+  }
+  
+  .note-box {
+    background: #f8d7da;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  
+  .note-box h3 {
+    color: #721c24;
+    margin-top: 0;
+  }
+  
+  .contact-info {
+    background: #d4edda;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .contact-info a {
+    color: #155724;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .contact-info a:hover {
+    text-decoration: underline;
+  }
+  
+  .apply-button-container {
+    text-align: center;
+    padding: 40px 0;
+  }
+  
+  .apply-button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2em;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(76, 175, 80, 0.2);
+  }
+  
+  .apply-button:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(76, 175, 80, 0.3);
+  }
+  
+  .apply-button:active {
+    transform: translateY(0);
+  }
+  
+  /* Адаптивность для мобильных устройств */
+  @media (max-width: 768px) {
+    .info-container {
+      padding: 20px 15px;
+    }
+  
+    .info-header h1 {
+      font-size: 1.8em;
+    }
+  
+    section {
+      padding: 20px;
+    }
+  
+    h2 {
+      font-size: 1.5em;
+    }
+  
+    .grant-types {
+      grid-template-columns: 1fr;
+    }
+  
+    .apply-button {
+      width: 100%;
+      padding: 15px 20px;
+    }
+  }
+  
+  /* Анимации */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  section {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  section:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  
+  section:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  
+  /* и так далее для остальных секций */
