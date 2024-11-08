@@ -1,142 +1,187 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import './Info.css';
 
-function Info() {
-  const navigate = useNavigate();
+// Card компонент
+const Card = ({ children, className = '', ...props }) => (
+  <motion.div 
+    className={`card ${className}`} 
+    whileHover={{ scale: 1.02 }}
+    {...props}
+  >
+    {children}
+  </motion.div>
+);
+
+// CardHeader компонент
+const CardHeader = ({ children }) => (
+  <div className="card-header">
+    {children}
+  </div>
+);
+
+// CardTitle компонент
+const CardTitle = ({ children }) => (
+  <h2 className="card-title">
+    {children}
+  </h2>
+);
+
+// CardContent компонент
+const CardContent = ({ children }) => (
+  <div className="card-content">
+    {children}
+  </div>
+);
+
+// Accordion компоненты
+const AccordionContext = React.createContext();
+
+const Accordion = ({ children, type = "single" }) => {
+  const [openItems, setOpenItems] = useState(new Set());
+
+  const toggleItem = (value) => {
+    setOpenItems(prev => {
+      const newItems = new Set(prev);
+      if (type === "single") {
+        newItems.clear();
+      }
+      if (newItems.has(value)) {
+        newItems.delete(value);
+      } else {
+        newItems.add(value);
+      }
+      return newItems;
+    });
+  };
 
   return (
-    <div className="info-container">
-      <div className="info-header">
-        <h1>Форма для падачы заяўкі на грантавую падтрымку праектаў, ініцыятыў і актывістаў ад BYSOL 2024</h1>
+    <AccordionContext.Provider value={{ openItems, toggleItem }}>
+      <div className="accordion">
+        {children}
       </div>
+    </AccordionContext.Provider>
+  );
+};
 
-      <div className="info-content">
-        <section className="intro-section">
-          <p>
-            Фонд BYSOL абвяшчае прыём заявак на грантынг для актывістаў і грамадзянскіх ініцыятыў з мэтай падтрымкі іх праектаў, 
-            накіраваных на вырашэнне сацыяльна-палітычных праблем у Беларусі, дэмакратычныя змены і развіццё грамадзянскай супольнасці ў краіне.
-          </p>
-        </section>
+const AccordionItem = ({ children, value }) => {
+  const { openItems, toggleItem } = React.useContext(AccordionContext);
+  const isOpen = openItems.has(value);
 
-        <section className="participation-section">
-          <h2>Хто можа ўдзельнічаць?</h2>
-          <p>
-            — Беларускія арганізацыі, ініцыятывы і актывісты ў Беларусі, Літве, Польшчы, Грузіі і Нямеччыне 
-            (якія працуюць не больш за пяць гадоў), якія рэалізуюць праекты ў галіне ўмацавання грамадзянскай супольнасці, 
-            абароны правоў чалавека, дэмакратыі і культуры памяці. Тэрмін рэалізацыі праектаў ад 3 да 6 месяцаў 
-            (старт 1 лістапада 2024 года).
-          </p>
-          <div className="support-note">
-            <p>Конкурс праводзіцца пры падтрымцы Фонду Памяць, адказнасць і будучыня (EVZ).</p>
-          </div>
-        </section>
-
-        <section className="funding-section">
-          <h2>Якая сума падтрымкі?</h2>
-          <p>
-            Фонд BYSOL прадаставіць на конкурснай аснове падтрымку як мінімум 10 праектам на агульную суму - 62.000€. 
-            Як будуць размеркаваны гэтыя сродкі?
-          </p>
-          <div className="grant-types">
-            <div className="grant-type">
-              <h3>Міні-гранты</h3>
-              <p>Праекты з бюджэтам да 5.000 €</p>
-            </div>
-            <div className="grant-type">
-              <h3>Мідзі-гранты</h3>
-              <p>Праекты з бюджэтам да 10.000 €</p>
-              <p className="note">Для ініцыятыў і актывістаў з досведам паспяховай рэалізацыі папярэдніх грантавых праектаў</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="support-section">
-          <h2>Што можа быць падтрымана?</h2>
-          <ul className="support-list">
-            <li>Праекты, накіраваныя на ўмацаванне грамадзянскай супольнасці</li>
-            <li>Праекты, накіраваныя на абарону правоў чалавека</li>
-            <li>Праекты, накіраваныя на падтрымку сацыяльна-уразлівых груп насельніцтва Беларусі, якія пацярпелі ад рэпрэсій</li>
-            <li>Валантэрскія ініцыятывы, якія дапамагаюць рэпрэсаваным беларусам</li>
-            <li>Праекты, накіраваныя на развіццё дэмакратычных прынцыпаў і вырашэнне сацыяльна-палітычных праблем унутры Беларусі</li>
-            <li>Праекты, накіраваныя на працу з тэмай культуры памяці</li>
-          </ul>
-        </section>
-
-        <section className="criteria-section">
-          <h2>Асноўныя крытэрыі ацэнкі праекта</h2>
-          <ul className="criteria-list">
-            <li>Адпаведнасць часавым межам рэалізацыі: працягласць праекта складае ад 3 да 6 месяцаў</li>
-            <li>Сфармулявана канкрэтная мэта, дакладна вызначаны мэтавыя групы і стратэгія дасягнення мэтаў</li>
-            <li>Адпаведнасць тэматыкам, пералічаным вышэй</li>
-            <li>Вылучана мэтавая аўдыторыя і яе меркаваны ахоп</li>
-            <li>Бяспека: заяўнік дэманструе разуменне пратаколаў бяспекі і крытычна ацэньвае рызыкі</li>
-          </ul>
-        </section>
-
-        <section className="training-section">
-          <h2>Што рабіць, калі не ведаеце як "паспяхова" падаць заяўку на грантынг?</h2>
-          <div className="training-info">
-            <p>Вы можаце запісацца на наш трэнінг "Як атрымаць фінансавую падтрымку свайго праекту?"</p>
-            <h3>📍ШТО БУДЗЕ НА ТРЭНІНГУ?</h3>
-            <ul>
-              <li>Даведаецеся, як вызначаць і апісваць праблему, якую будзе вырашаць ваш праект</li>
-              <li>Даведаецеся, як вызначыць вашу мэтавую групу</li>
-              <li>Зразумееце, як сфармуляваць мэту, задачы і вынікі праекта</li>
-              <li>Атрымаеце практычныя рэкамендацыі па стварэнні плана мерапрыемстваў праекта і складанні бюджэту праекта</li>
-            </ul>
-            <p className="training-dates">
-              Трэнінг 1 кастрычніка (аўторак) і 10 кастрычніка (чацвер) а 19:00 паводле Менску. 
-              <a 
-                href="https://docs.google.com/forms/d/e/your-form-id/viewform" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="register-link"
-              >
-                Зарэгістравацца тут
-              </a>
-            </p>
-          </div>
-        </section>
-
-        <section className="deadlines-section">
-          <h2>‼️ Тэрміны падачы і разгляду заявак</h2>
-          <ul className="deadlines-list">
-            <li>Заяўкі прымаюцца з 15 верасня 2024 года па 15 кастрычніка 2024 года ўключна</li>
-            <li>Тэрмін разгляду заявак і абвяшчэнне вынікаў заяўнікам: да 30 кастрычніка 2024 года</li>
-          </ul>
-        </section>
-
-        <section className="important-notes">
-          <div className="note-box">
-            <h3>ВАЖНА:</h3>
-            <p>
-              Калі патрабуюць умовы бяспекі заяўніка - мы можам аказаць непублічную падтрымку. 
-              Для праектаў, якія рэалізуюцца непасрэдна ў Беларусі, падтрымка можа быць толькі непублічнай.
-            </p>
-          </div>
-          <div className="contact-info">
-            <p>
-              Калі ў вас з'явіліся пытанні па запаўненні заяўкі або вам патрэбная дапамога - 
-              напішыце ў наш тг-акаўнт: {' '}
-              <a 
-                href="https://t.me/bysol_initiatives" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                @bysol_initiatives
-              </a>
-            </p>
-          </div>
-        </section>
-
-        <div className="apply-button-container">
-          <button onClick={() => navigate('/form')} className="apply-button">
-            Падаць заяўку
-          </button>
-        </div>
-      </div>
+  return (
+    <div className="accordion-item">
+      {React.Children.map(children, child => {
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child, { isOpen, value, onToggle: () => toggleItem(value) });
+        }
+        return child;
+      })}
     </div>
+  );
+};
+
+const AccordionTrigger = ({ children, isOpen, onToggle }) => (
+  <button 
+    className="accordion-trigger"
+    onClick={onToggle}
+  >
+    {children}
+    <span className={`arrow ${isOpen ? 'open' : ''}`}>▼</span>
+  </button>
+);
+
+const AccordionContent = ({ children, isOpen }) => (
+  isOpen && <div className="accordion-content">{children}</div>
+);
+
+// Основной компонент
+function Info() {
+  const navigate = useNavigate();
+  
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  };
+
+  const handleDownloadDoc1 = () => {
+    // Логика скачивания первого документа
+  };
+
+  const handleDownloadDoc2 = () => {
+    // Логика скачивания второго документа
+  };
+
+  return (
+    <motion.div 
+      className="container"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.header className="header" variants={itemVariants}>
+        <h1>🌟 Фонд BYSOL: Прыём заявак на грантынг 🌟</h1>
+        <p>
+          🚀 Падтрымка праектаў, накіраваных на вырашэнне сацыяльна-палітычных праблем у Беларусі...
+        </p>
+      </motion.header>
+
+      {/* Карточка "Кто может участвовать" */}
+      <Card variants={itemVariants}>
+        <CardHeader>
+          <CardTitle>👥 Хто можа ўдзельнічаць?</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {/* Контент */}
+        </CardContent>
+      </Card>
+
+      {/* Аккордеон */}
+      <Accordion type="single">
+        <AccordionItem value="what-can-be-supported">
+          <AccordionTrigger>🎯 Што можа быць падтрымана?</AccordionTrigger>
+          <AccordionContent>
+            {/* Контент */}
+          </AccordionContent>
+        </AccordionItem>
+        {/* Другие элементы аккордеона */}
+      </Accordion>
+
+      {/* Кнопки для скачивания */}
+      <div className="download-buttons">
+        <button onClick={handleDownloadDoc1} className="download-button">
+          <span className="download-icon">📄</span>
+          Спампаваць дакумент 1
+        </button>
+        <button onClick={handleDownloadDoc2} className="download-button">
+          <span className="download-icon">📄</span>
+          Спампаваць дакумент 2
+        </button>
+      </div>
+
+      {/* Кнопка навигации */}
+      <motion.div className="navigation-buttons" variants={itemVariants}>
+        <button 
+          onClick={() => navigate('/form')} 
+          className="next-button"
+        >
+          🚀 Падаць заяўку
+        </button>
+      </motion.div>
+    </motion.div>
   );
 }
 
